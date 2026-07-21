@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dott. Alessandro Colitta - Medicina del Sonno</title>
+    <meta name="description" content="Medico con certificazione di Esperto in Medicina del Sonno europea e italiana.">
+    <style>
+        /* === STILI GENERALI === */
+        :root {
+            --primary: #1e3a5f;      /* Blu notte, richiama la medicina e il sonno */
+            --secondary: #3b5998;
+            --accent: #27ae60;       /* Verde rassicurante per le call to action/prenotazioni */
+            --bg-light: #f8f9fa;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--text-light);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* === MENU DI NAVIGAZIONE === */
+        nav {
+            background-color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* === SEZIONE EROE (HEADER) === */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-light);
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h2 {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        /* === SEZIONI === */
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .section-light {
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .divider {
+            height: 4px;
+            width: 60px;
+            background-color: var(--secondary);
+            margin: 0 auto 3rem auto;
+            border-radius: 2px;
+        }
+
+        /* === GRIGLIE E CARDS === */
+        
+        /* Griglia flessibile di base */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Griglia fissa 2x2 (usata per la sezione "Attività") */
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Griglia fissa 1x3 */
+        .grid-3cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Griglia fissa 1x2 (usata per la sezione "Prenota una visita") */
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--text-light);
+            padding: 2.5rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Stile per le immagini dentro le card */
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Stile per le mappe iframe dentro le card */
+        .card-map {
+            width: 100%;
+            height: 200px;
+            border: 0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* === TABELLA CV === */
+        .cv-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--text-light);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: top;
+        }
+
+        .cv-section-title {
+            background-color: var(--bg-light);
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-top: 2rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .cv-date {
+            font-weight: 600;
+            width: 25%;
+            color: var(--secondary);
+        }
+
+        ul.cv-list {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer a {
+            color: #a0aec0;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        footer a:hover {
+            color: var(--text-light);
+        }
+
+        .contact-info {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #cbd5e0;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 900px) {
+            .grid-3cols {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .nav-links a {
+                margin-left: 0;
+                font-size: 0.9rem;
+            }
+            
+            /* Su mobile, le griglie diventano a singola colonna */
+            .grid-2x2, .grid-3cols, .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+            }
+            .cv-date {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            table td:nth-child(2) {
+                padding-top: 0.5rem;
+            }
+            .cv-section-title {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#" class="logo">Dott. Alessandro Colitta</a>
+        <div class="nav-links">
+            <a href="#attivita">Attività</a>
+            <a href="#prenota">Prenota una visita</a>
+            <a href="#cv">Curriculum Vitae</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="hero">
+        <h1>Dott. Alessandro Colitta</h1>
+        <h2><strong>Medico con certificazione di "Esperto in Medicina del Sonno"</strong> europea e italiana.<br><br>Esperienza nei più frequenti disturbi del sonno: insonnia, apnee in sonno, eccessiva sonnolenza diurna, sindrome delle gambe senza riposo e parasonnie.</h2>
+    </header>
+
+    <!-- ATTIVITÀ (GRIGLIA 2x2 CON IMMAGINI) -->
+    <section id="attivita" class="section section-light">
+        <h2 class="section-title">Scopri le mie attività</h2>
+        <div class="divider"></div>
+        <div class="grid-2x2">
+            <a href="#prenota" class="card">
+                <img src="2026-02-24-06-25-51-275.jpg" alt="Prenota una visita" class="card-img">
+                <h4>Prenota una Visita</h4>
+                <p>Scopri i servizi clinici disponibili e le modalità di prenotazione.</p>
+            </a>
+            <a href="#cv" class="card">
+                <img src="Foto crop.jpg" alt="Curriculum Vitae" class="card-img">
+                <h4>Curriculum Vitae</h4>
+                <p>Conosci le mie esperienze professionali e la mia formazione accademica.</p>
+            </a>
+            <a href="https://scholar.google.com/citations?user=HKPvho4AAAAJ&hl=en" target="_blank" class="card">
+                <img src="research.png" alt="Pubblicazioni Scientifiche" class="card-img">
+                <h4>Pubblicazioni Scientifiche</h4>
+                <p>Visualizza il mio profilo Google Scholar e l'attività di ricerca sul sonno.</p>
+            </a>
+            <a href="https://www.linkedin.com/in/alessandrocolitta000/" target="_blank" class="card">
+                <img src="Coffee.png" alt="Novità in Medicina del Sonno" class="card-img">
+                <h4>Novità in Medicina del Sonno</h4>
+                <p>Vai alla mia pagina LinkedIn dove pubblico news settimanali sulla medicina del sonno.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- PRENOTA UNA VISITA (GRIGLIA 1x2 CON MAPPA E IMMAGINE) -->
+    <section id="prenota" class="section">
+        <h2 class="section-title">Prenota una visita</h2>
+        <div class="divider"></div>
+        <div class="grid-2cols">
+            
+            <!-- Visita in Ambulatorio -->
+            <div class="card">
+                <iframe class="card-map" src="https://maps.google.com/maps?q=Croce%20Rossa%20Comitato%20di%20Empoli&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" title="Mappa Croce Rossa Empoli"></iframe>
+                <h4>In ambulatorio, visita di medicina del sonno</h4>
+                <p>La tua visita di medicina del sonno a Empoli.<br><br>
+        <strong>Sede:</strong> Via Arnolfo di Cambio 60, Empoli (CRI)</p>
+        <p><strong>Costo:</strong><br>
+				90€ solo visita<br>
+				120€ con monitoraggio domiciliare del sonno (actigrafia)<br><br>
+        <em>Se non trovi un orario che fa per te, contattami via email.</em></p>
+                <a href="https://calendar.app.google/C3ArzsP9YHu14g2y5" target="_blank" class="btn">Prenota qui</a>
+            </div>
+            
+            <!-- Televisita -->
+            <div class="card">
+                <img src="Coffee crop.png" alt="Televisita di Medicina del Sonno" class="card-img">
+                <h4>Televisita di medicina del sonno</h4>
+                <p>La tua televisita in videochiamata, dal luogo che preferisci.<br><br>
+                <strong>Costo:</strong><br>
+                70€ solo visita<br>
+                150€ con monitoraggio domiciliare del sonno (actigrafia)</p>
+                <a href="https://fisiosonno.com/dott-alessandro-colitta/" target="_blank" class="btn">Prenota qui</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CURRICULUM VITAE -->
+    <section id="cv" class="section section-light">
+        <h2 class="section-title">Curriculum Vitae</h2>
+        <div class="divider"></div>
+        <div class="cv-container">
+            <table>
+                <tbody>
+                    <!-- ESPERIENZE PROFESSIONALI -->
+                    <tr><td colspan="2" class="cv-section-title">Esperienze professionali</td></tr>
+                    <tr>
+                        <td class="cv-date">Dal Luglio 2026</td>
+                        <td>In collaborazione con la personal trainer e bodybuilder professionale Francesca D'anzi per programmi di wellness.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Dall'Aprile 2026</td>
+                        <td><strong>Televisite</strong> di <strong>medicina del sonno</strong> sulla piattaforma Fisiosonno.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Marzo-Maggio 2026</td>
+                        <td>Consulente per attività di <strong>prevenzione e benessere aziendale</strong> in collaborazione con SleepActa s.r.l.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Gennaio 2026</td>
+                        <td><strong>Co-docente Universitario</strong> per l’Attività Didattica Elettiva “Regolazione fisiologica del ritmo sonno-veglia e i suoi disturbi” presso l’<strong>Università di Pisa</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Dal Novembre 2023</td>
+                        <td><strong>Diagnosi e gestione di disturbi del ritmo sonno-veglia</strong>, refertazione dei seguenti esami strumentali presso il <strong>Centro di Medicina del Sonno, U.O. Neurologia, AOUP</strong>: videopolisonnografia, elettroencefalogramma, actigrafia, monitoraggio cardiorespiratorio.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Giugno-Luglio 2023</td>
+                        <td>Sostituto di medico di medicina generale.</td>
+                    </tr>
+
+                    <!-- FORMAZIONE -->
+                    <tr><td colspan="2" class="cv-section-title">Formazione e Titoli</td></tr>
+                    <tr>
+                        <td class="cv-date">09 Luglio 2026</td>
+                        <td><strong>Iscrizione all'Albo degli Esperti in Medicina del Sonno Italiano</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">27 Settembre 2025</td>
+                        <td><strong>Certificazione di Esperto in Medicina del Sonno</strong> rilasciata dalla <strong>European Sleep Research Society</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Dal Novembre 2023</td>
+                        <td><strong>Specialista in formazione</strong>, Università di Pisa, Centro di Medicina del Sonno, U.O. Neurologia, Azienda Ospedaliera Universitaria Pisana.</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">2017 - 2023</td>
+                        <td><strong>Laurea Specialistica in Medicina e Chirurgia LM-41, Università di Pisa</strong><br>Voto: 110 con lode e dignità di stampa.</td>
+                    </tr>
+
+                    <!-- RICERCA -->
+                    <tr><td colspan="2" class="cv-section-title">Attività di Ricerca Scientifica</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            Partecipo attivamente a <strong>studi riguardanti i disturbi del ritmo sonno-veglia</strong> come membro dei team del prof. Ugo Faraguna e della prof.ssa Enrica Bonanni.<br><br>
+                            La mia attività di ricerca riguarda principalmente:
+                            <ul class="cv-list">
+                                <li>Utilizzo di <strong>dispositivi indossabili</strong> (actigrafia) per il monitoraggio dei ritmi sonno-veglia.</li>
+                                <li><strong>Diagnostica e trattamento dell’insonnia</strong>.</li>
+                                <li>Sintomatologia delle malattie neuromuscolari rare.</li>
+                                <li>Utilizzo di biomarcatori di demenza per la predizione dell’accesso in pronto soccorso in soggetti anziani.</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <!-- COMPETENZE TECNOLOGICHE -->
+                    <tr><td colspan="2" class="cv-section-title">Capacità Tecnologiche e Informatiche</td></tr>
+                    <tr>
+                        <td class="cv-date">Analisi e gestione dati</td>
+                        <td>Linguaggi di programmazione R, MATLAB e Python per estrazione, analisi e visualizzazione di dati (pipelines accelerometriche, actigrafia).</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Intelligenza artificiale</td>
+                        <td>Gemini 3.1 Pro, Claude, NotebookLM (studio, coding, presentazioni). Consensus e OpenEvidence per revisione letteratura.</td>
+                    </tr>
+
+                    <!-- INFO AGGIUNTIVE -->
+                    <tr><td colspan="2" class="cv-section-title">Informazioni Aggiuntive</td></tr>
+                    <tr>
+                        <td class="cv-date">Lingue</td>
+                        <td>Italiano (Madrelingua), Inglese (C1 Level), Spagnolo (B1).</td>
+                    </tr>
+                    <tr>
+                        <td class="cv-date">Volontariato</td>
+                        <td>Membro della Croce Rossa Italiana dal 2016 (Comitato di Empoli).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Dott. Alessandro Colitta</div>
+        <div>
+            <a href="https://www.linkedin.com/in/alessandrocolitta000/" target="_blank">LinkedIn</a> |
+            <a href="https://scholar.google.com/citations?user=HKPvho4AAAAJ&hl=en" target="_blank">Google Scholar</a>
+        </div>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:colitta.med@gmail.com" style="margin: 0; color: var(--accent);">colitta.med@gmail.com</a></p>
+            <p>Via Arnolfo di Cambio, 60, Empoli, FI, Italia (Sede Croce Rossa Italiana)</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">Copyright © 2026 Dott. Alessandro Colitta - Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
